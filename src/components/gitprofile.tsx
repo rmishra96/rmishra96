@@ -9,7 +9,8 @@ import {
   setTooManyRequestError,
 } from '../constants/errors';
 import '../assets/index.css';
-import { getInitialTheme, getSanitizedConfig, setupHotjar } from '../utils';
+import { LOCAL_STORAGE_KEY_NAME } from '../constants';
+import { getInitialTheme, getSanitizedConfig, resolveTheme, setupHotjar } from '../utils';
 import { SanitizedConfig } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import { DEFAULT_THEMES } from '../constants/default-themes';
@@ -67,9 +68,17 @@ const sortGithubRepos = (
  */
 const GitProfile = ({ config }: { config: any }) => {
   const [sanitizedConfig] = useState<SanitizedConfig | Record<string, never>>(
-    getSanitizedConfig(config),
+    () => getSanitizedConfig(config),
   );
-  const [theme, setTheme] = useState<string>(DEFAULT_THEMES[0]);
+  const [theme, setTheme] = useState<string>(() => {
+    const sanitized = getSanitizedConfig(config);
+
+    if (Object.keys(sanitized).length === 0) {
+      return DEFAULT_THEMES[0];
+    }
+
+    return getInitialTheme(sanitized.themeConfig);
+  });
   const [error, setError] = useState<CustomError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -228,6 +237,30 @@ const GitProfile = ({ config }: { config: any }) => {
   useEffect(() => {
     theme && document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (
+      Object.keys(sanitizedConfig).length === 0 ||
+      sanitizedConfig.themeConfig.disableSwitch ||
+      !sanitizedConfig.themeConfig.respectPrefersColorScheme
+    ) {
+      return;
+    }
+
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncSystemTheme = () => {
+      if (localStorage.getItem(LOCAL_STORAGE_KEY_NAME)) {
+        return;
+      }
+
+      const nextTheme = resolveTheme(sanitizedConfig.themeConfig, null);
+      setTheme(nextTheme);
+      document.documentElement.setAttribute('data-theme', nextTheme);
+    };
+
+    media.addEventListener('change', syncSystemTheme);
+    return () => media.removeEventListener('change', syncSystemTheme);
+  }, [sanitizedConfig]);
 
   const handleError = (error: AxiosError | Error): void => {
     console.error('Error:', error);

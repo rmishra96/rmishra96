@@ -1,7 +1,7 @@
 import { RiDice4Line } from 'react-icons/ri';
 import { SanitizedThemeConfig } from '../../interfaces/sanitized-config';
 import { LOCAL_STORAGE_KEY_NAME } from '../../constants';
-import { skeleton } from '../../utils';
+import { getAvailableThemes, skeleton } from '../../utils';
 import { MouseEvent } from 'react';
 
 /**
@@ -25,6 +25,8 @@ const ThemeChanger = ({
   loading: boolean;
   themeConfig: SanitizedThemeConfig;
 }) => {
+  const availableThemes = getAvailableThemes(themeConfig);
+
   const changeTheme = (
     e: MouseEvent<HTMLAnchorElement>,
     selectedTheme: string,
@@ -84,7 +86,7 @@ const ThemeChanger = ({
                 <ul className="p-4 menu menu-sm">
                   {[
                     themeConfig.defaultTheme,
-                    ...themeConfig.themes.filter(
+                    ...availableThemes.filter(
                       (item) => item !== themeConfig.defaultTheme,
                     ),
                   ].map((item, index) => (

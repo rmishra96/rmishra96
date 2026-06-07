@@ -66,12 +66,13 @@
   .scroller {
     width: 8px;
     height: 8px;
-    background-color: #f1f1f1;
+    background-color: var(--color-base-200);
   }
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: var(--color-base-content);
+  opacity: 0.3;
   border-radius: 10px;
 }
 

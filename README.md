@@ -28,7 +28,10 @@ This README section documents the git and deployment commands that were run duri
 
 - Deploy to GitHub Pages (automated via `gh-pages` package):
 
+  - `npm install`
+  - `npm run build`
   - `npm run deploy`  # runs `predeploy` -> `build` -> `gh-pages -d dist`
+  - `git ls-remote --heads origin gh-pages`  # verify the gh-pages branch exists remotely
 
 - Manual gh-pages creation (if automation fails):
 

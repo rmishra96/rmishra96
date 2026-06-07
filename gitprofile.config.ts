@@ -1,6 +1,6 @@
 ﻿import { SanitizedConfig } from "./src/interfaces/sanitized-config";
 
-const CONFIG: SanitizedConfig = {
+const CONFIG: any = {
   profile: {
     name: "R. Mishra",
     image: "/avatar.png",

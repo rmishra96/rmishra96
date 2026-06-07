@@ -25,7 +25,7 @@ type Colors = {
 };
 
 export const getSanitizedConfig = (
-  config: Config,
+  config: any,
 ): SanitizedConfig | Record<string, never> => {
   try {
     return {

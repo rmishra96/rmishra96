@@ -116,6 +116,12 @@ export interface SanitizedBlog {
   limit: number;
 }
 
+export interface SanitizedProfile {
+  avatarUrl?: string;
+  title?: string;
+  bio?: string;
+}
+
 export interface SanitizedThemeConfig {
   defaultTheme: string;
   disableSwitch: boolean;
@@ -138,6 +144,7 @@ export interface SanitizedConfig {
   googleAnalytics: SanitizedGoogleAnalytics;
   hotjar: SanitizedHotjar;
   blog: SanitizedBlog;
+  profile?: SanitizedProfile;
   themeConfig: SanitizedThemeConfig;
   footer?: string;
   enablePWA: boolean;

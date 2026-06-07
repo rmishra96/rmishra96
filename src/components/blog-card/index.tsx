@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import LazyImage from '../lazy-image';
 import { PiNewspaper } from 'react-icons/pi';
-import { getDevPost, getMediumPost } from '@arifszn/blog-js';
 import { formatDistance } from 'date-fns';
 import { SanitizedBlog } from '../../interfaces/sanitized-config';
 import { ga, skeleton } from '../../utils';
@@ -19,19 +18,7 @@ const BlogCard = ({
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    if (blog.source === 'medium') {
-      getMediumPost({
-        user: blog.username,
-      }).then((res) => {
-        setArticles(res);
-      });
-    } else if (blog.source === 'dev') {
-      getDevPost({
-        user: blog.username,
-      }).then((res) => {
-        setArticles(res);
-      });
-    }
+    setArticles([]);
   }, [blog.source, blog.username]);
 
   const renderSkeleton = () => {

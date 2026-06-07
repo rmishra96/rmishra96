@@ -311,6 +311,23 @@ interface ThemeConfig {
   themes?: Array<string>;
 }
 
+interface ProfileConfig {
+  /**
+   * Override the GitHub avatar URL with a custom profile photo URL.
+   */
+  avatarUrl?: string;
+
+  /**
+   * Custom title or tag to show under the profile name.
+   */
+  title?: string;
+
+  /**
+   * Override the GitHub bio text.
+   */
+  bio?: string;
+}
+
 interface Config {
   /**
    * GitHub config
@@ -381,6 +398,11 @@ interface Config {
    * Blog config
    */
   blog?: Blog;
+
+  /**
+   * Profile overrides
+   */
+  profile?: ProfileConfig;
 
   /**
    * Theme config

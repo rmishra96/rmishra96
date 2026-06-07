@@ -118,6 +118,11 @@ export const getSanitizedConfig = (
         limit: config?.blog?.limit || 5,
         display: !!config?.blog?.username && !!config?.blog?.source,
       },
+      profile: {
+        avatarUrl: config?.profile?.avatarUrl,
+        title: config?.profile?.title,
+        bio: config?.profile?.bio,
+      },
       themeConfig: {
         defaultTheme: config?.themeConfig?.defaultTheme || DEFAULT_THEMES[0],
         disableSwitch: config?.themeConfig?.disableSwitch || false,

@@ -1,231 +1,160 @@
-// gitprofile.config.ts
+﻿// gitprofile.config.ts
 
 const CONFIG = {
   github: {
-    username: 'arifszn', // Your GitHub org/user name. (This is the only required config)
+    username: 'rmishra96',
   },
-  /**
-   * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/arifszn/arifszn.github.io, set base to '/'.
-   * If you are deploying to https://<USERNAME>.github.io/<REPO_NAME>/,
-   * for example your repository is at https://github.com/arifszn/portfolio, then set base to '/portfolio/'.
-   */
-  base: '/gitprofile/',
+  base: '/',
   projects: {
     github: {
-      display: true, // Display GitHub projects?
-      header: 'Github Projects',
-      mode: 'automatic', // Mode can be: 'automatic' or 'manual'
+      display: true,
+      header: 'GitHub Projects',
+      mode: 'automatic',
       automatic: {
-        sortBy: 'stars', // Sort projects by 'stars' or 'updated'
-        limit: 8, // How many projects to display.
+        sortBy: 'stars',
+        limit: 8,
         exclude: {
-          forks: false, // Forked projects will not be displayed if set to true.
-          projects: [], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
+          forks: false,
+          projects: [],
         },
-      },
-      manual: {
-        // Properties for manually specifying projects
-        projects: ['arifszn/gitprofile', 'arifszn/pandora'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']
       },
     },
     external: {
-      header: 'My Projects',
-      // To hide the `External Projects` section, keep it empty.
+      header: 'Featured Projects',
       projects: [
         {
-          title: 'Project Name',
+          title: 'RAG‑Powered Knowledge Assistant',
           description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+            'Context-aware enterprise Q&A using vector DB + LLMs.',
           imageUrl:
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
-          link: 'https://example.com',
+            'https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-1073.jpg',
+          link: 'https://github.com/rmishra96/rag-knowledge-assistant',
         },
         {
-          title: 'Project Name',
+          title: 'Federated GraphQL Platform',
           description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+            'Unified API layer across multiple domains with GraphQL federation.',
           imageUrl:
-            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg',
-          link: 'https://example.com',
+            'https://img.freepik.com/free-vector/graphql-api-concept-illustration_114360-1002.jpg',
+          link: 'https://github.com/rmishra96/federated-graphql-platform',
+        },
+        {
+          title: 'Terraform Infrastructure Automation',
+          description:
+            'Cloud infrastructure as code for reproducible deployments.',
+          imageUrl:
+            'https://img.freepik.com/free-vector/cloud-computing-concept-illustration_114360-1072.jpg',
+          link: 'https://github.com/rmishra96/terraform-infra-automation',
         },
       ],
     },
   },
-  seo: { title: 'Portfolio of Ariful Alam', description: '', imageURL: '' },
+  seo: {
+    title: 'Software Engineering Lead | Backend Architect | Cloud & AI Innovator',
+    description:
+      'Dynamic Software Engineering Lead with 12+ years of experience in microservices, cloud migration, CI/CD automation, and Generative AI. Skilled in RAG pipelines, LLMs, GraphQL federation, Terraform automation, and TOGAF enterprise architecture. Passionate about building intelligent, scalable systems and mentoring engineering teams.',
+    imageURL: '',
+  },
   social: {
-    linkedin: 'ariful-alam',
-    x: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
-    researchGate: '',
-    facebook: '',
-    instagram: '',
-    reddit: '',
-    threads: '',
-    youtube: '', // example: 'pewdiepie'
-    udemy: '',
-    dribbble: '',
-    behance: '',
-    medium: 'arifszn',
-    dev: 'arifszn',
-    stackoverflow: '', // example: '1/jeff-atwood'
-    discord: '',
-    telegram: '',
-    website: 'https://www.arifszn.com',
-    phone: '',
-    email: '',
+    linkedin: 'ranjanmishra96',
+    github: 'rmishra96',
+    medium: 'ranjanmishra96',
+    website: 'https://rmishra96.github.io',
+    phone: '08826011176',
+    email: 'ranjan.mishra96@hotmail.com',
   },
   resume: {
-    fileUrl:
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+    fileUrl: 'https://rmishra96.github.io/resume.pdf',
+  },
+  googleAnalytics: {
+    id: '',
+  },
+  profile: {
+    avatarUrl: 'https://avatars.githubusercontent.com/u/23233504?v=4',
+    title: 'Software Engineering Lead | Backend Architect | Cloud & AI Innovator | TOGAF Certified',
+    bio: '',
   },
   skills: [
-    'PHP',
-    'Laravel',
-    'JavaScript',
-    'React.js',
-    'Node.js',
-    'Nest.js',
-    'MySQL',
-    'PostgreSQL',
-    'Git',
+    'Java',
+    'Spring Boot',
+    'Kafka',
+    'GraphQL',
+    'Federated Graph',
+    'Terraform',
     'Docker',
-    'PHPUnit',
-    'CSS',
-    'Antd',
-    'Tailwind',
+    'Kubernetes',
+    'AWS Lambda',
+    'GitHub Actions',
+    'React.js',
+    'Microservices',
+    'TOGAF',
+    'RAG',
+    'LLMs',
+    'Generative AI',
+    'Agentic AI',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'Optum Global Solutions',
+      position: 'Software Engineering Lead',
+      from: 'February 2018',
       to: 'Present',
-      companyLink: 'https://example.com',
+      companyLink: 'https://www.optum.com',
     },
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'Rolta India',
+      position: 'Software Engineer',
+      from: 'September 2016',
+      to: 'February 2018',
+      companyLink: 'https://www.rolta.com',
     },
   ],
   certifications: [
     {
-      name: 'Lorem ipsum',
-      body: 'Lorem ipsum dolor sit amet',
-      year: 'March 2022',
-      link: 'https://example.com',
+      name: 'AI Agents Fundamentals',
+      body: 'Hugging Face',
+      year: 'September 2025',
+      link: 'https://huggingface.co',
+    },
+    {
+      name: 'Academy Accreditation – Databricks Fundamentals',
+      body: 'Databricks',
+      year: 'November 2024',
+      link: 'https://databricks.com',
+    },
+    {
+      name: 'Academy Accreditation – Generative AI Fundamentals',
+      body: 'Databricks',
+      year: 'January 2024',
+      link: 'https://databricks.com',
+    },
+    {
+      name: 'TOGAF® Standard, Version 9.2',
+      body: 'The Open Group',
+      year: 'April 2024',
+      link: 'https://www.opengroup.org',
+    },
+    {
+      name: 'Microsoft Certified: Azure Solutions Architect Expert (AZ-303)',
+      body: 'Microsoft',
+      year: '2023',
+      link: 'https://microsoft.com',
     },
   ],
   educations: [
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2015',
-      to: '2019',
+      institution: 'BITS Pilani',
+      degree: 'M.Tech, ML, Deep RL, Data Mining',
+      from: '2018',
+      to: '2020',
     },
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
+      institution: 'Magadh University',
+      degree: 'B.Sc (Engineering), Electronics & Communication',
+      from: '2007',
+      to: '2012',
     },
   ],
-  publications: [
-    {
-      title: 'Publication Title',
-      conferenceName: '',
-      journalName: 'Journal Name',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Publication Title',
-      conferenceName: 'Conference Name',
-      journalName: '',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-  ],
-  // Display articles from your medium or dev account. (Optional)
-  blog: {
-    source: 'dev', // medium | dev
-    username: 'arifszn', // to hide blog section, keep it empty
-    limit: 2, // How many articles to display. Max is 10.
-  },
-  googleAnalytics: {
-    id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
-  },
-  // Track visitor interaction and behavior. https://www.hotjar.com
-  hotjar: { id: '', snippetVersion: 6 },
-  themeConfig: {
-    defaultTheme: 'lofi',
-
-    // Hides the switch in the navbar
-    // Useful if you want to support a single color mode
-    disableSwitch: false,
-
-    // Should use the prefers-color-scheme media-query,
-    // using user system preferences, instead of the hardcoded defaultTheme
-    respectPrefersColorScheme: false,
-
-    // Display the ring in Profile picture
-    displayAvatarRing: true,
-
-    // Available themes. To remove any theme, exclude from here.
-    themes: [
-      'light',
-      'dark',
-      'cupcake',
-      'bumblebee',
-      'emerald',
-      'corporate',
-      'synthwave',
-      'retro',
-      'cyberpunk',
-      'valentine',
-      'halloween',
-      'garden',
-      'forest',
-      'aqua',
-      'lofi',
-      'pastel',
-      'fantasy',
-      'wireframe',
-      'black',
-      'luxury',
-      'dracula',
-      'cmyk',
-      'autumn',
-      'business',
-      'acid',
-      'lemonade',
-      'night',
-      'coffee',
-      'winter',
-      'dim',
-      'nord',
-      'sunset',
-      'caramellatte',
-      'abyss',
-      'silk',
-      'procyon',
-    ],
-  },
-
-  // Optional Footer. Supports plain text or HTML.
-  footer: `Made with <a 
-      class="text-primary" href="https://github.com/arifszn/gitprofile"
-      target="_blank"
-      rel="noreferrer"
-    >GitProfile</a> and ❤️`,
-
-  enablePWA: true,
 };
 
 export default CONFIG;

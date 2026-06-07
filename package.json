@@ -1,20 +1,22 @@
 {
-  "name": "@arifszn/gitprofile",
-  "description": "Create an automatic portfolio based on GitHub profile",
-  "version": "4.0.0",
+  "name": "rmishra96-gitprofile",
+  "description": "Create a personal portfolio based on GitHub profile",
+  "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "author": "arifszn",
+  "author": "Ranjan Mishra",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arifszn/gitprofile.git"
+    "url": "https://github.com/rmishra96/gitprofile.git"
   },
   "bugs": {
-    "url": "https://github.com/arifszn/gitprofile/issues"
+    "url": "https://github.com/rmishra96/gitprofile/issues"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prettier": "prettier --check \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
@@ -26,7 +28,6 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@arifszn/blog-js": "^2.0.6",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -50,7 +51,8 @@
     "vail": "^1.0.3",
     "vite": "^7.1.7",
     "vite-plugin-html": "^3.2.2",
-    "vite-plugin-pwa": "^1.0.1"
+    "vite-plugin-pwa": "^1.0.1",
+    "gh-pages": "^5.0.0"
   },
   "keywords": [
     "git-profile",

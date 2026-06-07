@@ -70,6 +70,15 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               </span>
             )}
           </h5>
+          {loading || !profile ? (
+            skeleton({ widthCls: 'w-48', heightCls: 'h-5' })
+          ) : (
+            profile.title && (
+              <div className="mt-2 text-sm text-base-content opacity-70">
+                {profile.title}
+              </div>
+            )
+          )}
           <div className="mt-3 text-base-content font-mono">
             {loading || !profile
               ? skeleton({ widthCls: 'w-48', heightCls: 'h-5' })

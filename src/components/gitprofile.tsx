@@ -25,7 +25,6 @@ import CertificationCard from './certification-card';
 import { GithubProject } from '../interfaces/github-project';
 import GithubProjectCard from './github-project-card';
 import ExternalProjectCard from './external-project-card';
-import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
 
@@ -105,9 +104,14 @@ const GitProfile = ({ config }: { config: Config }) => {
       const data = response.data;
 
       setProfile({
-        avatar: data.avatar_url,
+        avatar: sanitizedConfig.profile?.avatarUrl || data.avatar_url,
         name: data.name || ' ',
-        bio: data.bio || '',
+        title: sanitizedConfig.profile?.title,
+        bio:
+          sanitizedConfig.profile?.bio ??
+          (data.bio === 'Software Engineer - Application Developer'
+            ? ''
+            : data.bio || ''),
         location: data.location || '',
         company: data.company || '',
       });
@@ -262,13 +266,6 @@ const GitProfile = ({ config }: { config: Config }) => {
                         sanitizedConfig.projects.external.projects
                       }
                       googleAnalyticId={sanitizedConfig.googleAnalytics.id}
-                    />
-                  )}
-                  {sanitizedConfig.blog.display && (
-                    <BlogCard
-                      loading={loading}
-                      googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
-                      blog={sanitizedConfig.blog}
                     />
                   )}
                 </div>

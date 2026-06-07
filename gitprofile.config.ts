@@ -1,6 +1,7 @@
 ﻿import { SanitizedConfig } from './src/interfaces/sanitized-config';
 
 const CONFIG: SanitizedConfig = {
+  basePath: '/rmishra96/',
   github: {
     username: 'rmishra96',
   },

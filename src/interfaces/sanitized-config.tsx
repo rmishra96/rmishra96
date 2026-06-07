@@ -125,6 +125,7 @@ export interface SanitizedThemeConfig {
 }
 
 export interface SanitizedConfig {
+  basePath?: string;
   github: SanitizedGithub;
   projects: SanitizedProjects;
   seo: SanitizedSEO;

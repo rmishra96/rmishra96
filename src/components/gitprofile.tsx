@@ -29,6 +29,36 @@ import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
 
+type GithubRepoApiItem = {
+  name: string;
+  html_url: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  fork: boolean;
+  updated_at: string;
+};
+
+const sortGithubRepos = (
+  repos: GithubRepoApiItem[],
+  sortBy: string,
+): GithubRepoApiItem[] => {
+  return [...repos].sort((a, b) => {
+    switch (sortBy) {
+      case 'forks':
+        return b.forks_count - a.forks_count;
+      case 'updated':
+        return (
+          new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        );
+      case 'stars':
+      default:
+        return b.stargazers_count - a.stargazers_count;
+    }
+  });
+};
+
 /**
  * Renders the GitProfile component.
  *
@@ -45,6 +75,50 @@ const GitProfile = ({ config }: { config: any }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
 
+  const getGithubProjectsFromReposApi = useCallback(async (): Promise<GithubProject[]> => {
+    const url = `https://api.github.com/users/${sanitizedConfig.github.username}/repos?per_page=100`;
+    const repoResponse = await axios.get<GithubRepoApiItem[]>(url, {
+      headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+    });
+
+    let repos = repoResponse.data;
+
+    if (sanitizedConfig.projects.github.automatic.exclude.forks) {
+      repos = repos.filter((repo) => !repo.fork);
+    }
+
+    const excludedProjects =
+      sanitizedConfig.projects.github.automatic.exclude.projects;
+    if (excludedProjects.length > 0) {
+      repos = repos.filter(
+        (repo) =>
+          !excludedProjects.includes(
+            `${sanitizedConfig.github.username}/${repo.name}`,
+          ),
+      );
+    }
+
+    return sortGithubRepos(
+      repos,
+      sanitizedConfig.projects.github.automatic.sortBy,
+    )
+      .slice(0, sanitizedConfig.projects.github.automatic.limit)
+      .map((repo) => ({
+        name: repo.name,
+        html_url: repo.html_url,
+        description: repo.description || '',
+        stargazers_count: String(repo.stargazers_count),
+        forks_count: String(repo.forks_count),
+        language: repo.language || '',
+      }));
+  }, [
+    sanitizedConfig.github.username,
+    sanitizedConfig.projects.github.automatic.exclude.forks,
+    sanitizedConfig.projects.github.automatic.exclude.projects,
+    sanitizedConfig.projects.github.automatic.sortBy,
+    sanitizedConfig.projects.github.automatic.limit,
+  ]);
+
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
       if (sanitizedConfig.projects.github.mode === 'automatic') {
@@ -60,12 +134,23 @@ const GitProfile = ({ config }: { config: any }) => {
         const query = `user:${sanitizedConfig.github.username}+fork:${!sanitizedConfig.projects.github.automatic.exclude.forks}${excludeRepo}`;
         const url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.projects.github.automatic.sortBy}&per_page=${sanitizedConfig.projects.github.automatic.limit}&type=Repositories`;
 
-        const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
-        });
-        const repoData = repoResponse.data;
+        try {
+          const repoResponse = await axios.get(url, {
+            headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+          });
+          const repoData = repoResponse.data;
 
-        return repoData.items;
+          return repoData.items;
+        } catch (searchError) {
+          const axiosSearchError = searchError as AxiosError;
+          const searchStatus = axiosSearchError.response?.status;
+
+          if (searchStatus === 422) {
+            return getGithubProjectsFromReposApi();
+          }
+
+          throw searchError;
+        }
       } else {
         if (sanitizedConfig.projects.github.manual.projects.length === 0) {
           return [];
@@ -92,6 +177,7 @@ const GitProfile = ({ config }: { config: any }) => {
       sanitizedConfig.projects.github.automatic.limit,
       sanitizedConfig.projects.github.automatic.exclude.forks,
       sanitizedConfig.projects.github.automatic.exclude.projects,
+      getGithubProjectsFromReposApi,
     ],
   );
 

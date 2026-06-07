@@ -6,7 +6,6 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
